@@ -1,0 +1,16 @@
+service: stop-instances-tag
+
+provider:
+  name: aws
+  runtime: python3.7
+  memorySize: 128
+
+  stage: dev
+  stackName: bigdata-stop-instances-tag
+  role: arn:aws:iam::99999999999:role/stop_instances
+
+functions:
+  notify:
+    handler: main.stop
+    events:
+      - schedule: cron(0 0 ? * MON-FRI *)
